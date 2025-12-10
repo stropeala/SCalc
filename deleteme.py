@@ -49,7 +49,8 @@ btnResult = Button(buttonsFrame5, text="=", fg="black", background="darkgray")
 
 # We create the functions
 def clicked():
-    pass
+    equation = equationText.get()
+    equationText.append(equation)
 
 
 # We create the pack positions
