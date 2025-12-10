@@ -48,8 +48,8 @@ btnResult = Button(buttonsFrame5, text="=", fg="black", background="darkgray")
 
 
 # We create the functions
-def clicked():
-    equation = equationText.get()
+def clicked(n: int):
+    equation = n
     equationText.append(equation)
 
 
