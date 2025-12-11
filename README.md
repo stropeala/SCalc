@@ -1,2 +1,2 @@
 # SCalc
-Calculator app written in python
+Calculator app written in python using tkinter
