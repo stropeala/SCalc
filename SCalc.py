@@ -32,6 +32,7 @@ equationText.pack(side=LEFT, fill=BOTH, expand=True)
 def add_to_equation(equationText, button_input):
     # We create a function that gets the user Entry input and
     # appends the button input to it
+
     current_equation = equationText.get()
     equationText.delete(0, END)  # Deletes the Entry box
     equationText.insert(END, current_equation + button_input)
@@ -40,6 +41,7 @@ def add_to_equation(equationText, button_input):
 def equation():
     # We create a function that gets the string from the Entry box and
     # calculates the qeuation if its valid using eval
+
     current_equation = equationText.get()
     equationText.delete(0, END)
     try:
@@ -50,8 +52,14 @@ def equation():
 
 
 def plus_minus():
+    # We create a function that changes
+    # wether the number is positive or negative
+
+    # We delete the last number in the Entry box
     current_equation = equationText.get()
     equationText.delete(len(current_equation) - len(current_equation.split()[-1]), END)
+
+    # We now check to see if the number is positive or negative
     number = current_equation.split()[-1]
     if number.startswith("(-") and number.endswith(")"):
         equationText.insert(END, number[2:-1])
