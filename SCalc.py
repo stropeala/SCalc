@@ -45,6 +45,8 @@ def equation():
     current_equation = equationText.get()
     equationText.delete(0, END)
     try:
+        # dont type:
+        # __import__('os').system('reboot')
         result = eval(current_equation)
         equationText.insert(END, result)
     except (ValueError, SyntaxError, ZeroDivisionError) as error:
