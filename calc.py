@@ -5,9 +5,11 @@ def calculator():
     # We start by doing a small introduction and then
     # asking the user for an equation
     print("Welcome to the Calculator, to exit type 'Go to sleep!' or Ctrl + C")
+
     while True:
         try:
             input1 = input("Enter an equation (maximum of 6 numbers): ")
+
         except KeyboardInterrupt:
             print("\nExiting Calculator...")
             break
@@ -40,50 +42,72 @@ def calculator():
                 while True:
                     # We make a loop so the user can keep making
                     # equations user the last operation's result
-                    q = input(
-                        "Do you want to continue with the previous result? (Y/N): "
-                    )
-                    if q.lower() == "y":
+                    while True:
                         try:
-                            input2 = input(
-                                f"Enter an equation to add to {result1} (maximum of 5 numbers), start with either +, -, *, /: "
+                            q = input(
+                                "Do you want to continue with the previous result? (Y/N): "
                             )
+                            if q == "y":
+                                break
+                            elif q == "n":
+                                print("Going back...")
+                                break
+                            else:
+                                print("Please type 'Y' for yes or 'N' for no.")
+
                         except KeyboardInterrupt:
-                            print("\nGoing back...")
-                            break
+                            print("\nExiting Calculator...")
+                            return
 
-                        if input2.lower() in [
-                            "go to sleep!",
-                            "quit",
-                            "go to sleep",
-                            "gts",
-                            "exit",
-                        ]:
-                            print("Going back...")
-                            break
+                    if q.lower() == "n":
+                        break
 
-                        numbers2 = re.findall(r"\d+\.?\d*", input2)
+                    try:
+                        input2 = input(
+                            f"Enter an equation to add to {result1} (maximum of 5 numbers), start with either +, -, *, /: "
+                        )
 
-                        # This makes sure the second input starts with a symbol
-                        # so eval can calculate
-                        if not input2 or input2[0] not in ["+", "-", "*", "/"]:
-                            print("Equation must start with +, -, *, or /")
+                    except KeyboardInterrupt:
+                        print("\nGoing back...")
+                        break
 
-                        elif len(numbers2) > 5:
-                            print(f"{len(numbers2)} exceeds the max numbers (5)")
-
-                        # We combine the previous result with the new input
-                        # and replace the previous result so the loop continues
-                        else:
-                            equation2 = f"({result1}) {input2}"
-                            print(f"This is your equation: {equation2}")
-                            result1 = round(eval(equation2.replace("x", "*")), 3)
-                            print(f"Result: {result1}")
-                    else:
+                    if input2.lower() in [
+                        "go to sleep!",
+                        "quit",
+                        "go to sleep",
+                        "gts",
+                        "exit",
+                    ]:
                         print("Going back...")
                         break
 
-        except (ValueError, SyntaxError, ZeroDivisionError) as error:
+                    numbers2 = re.findall(r"\d+\.?\d*", input2)
+
+                    # This makes sure the second input starts with a symbol
+                    # so eval can calculate
+                    if not input2 or input2[0] not in ["+", "-", "*", "/"]:
+                        print("Equation must start with +, -, *, or /")
+
+                    elif len(numbers2) > 5:
+                        print(f"{len(numbers2)} exceeds the max numbers (5)")
+
+                    # We combine the previous result with the new input
+                    # and replace the previous result so the loop continues
+                    else:
+                        equation2 = f"({result1}) {input2}"
+                        print(f"This is your equation: {equation2}")
+                        try:
+                            result1 = round(eval(equation2.replace("x", "*")), 3)
+                            print(f"Result: {result1}")
+                        except (
+                            ValueError,
+                            SyntaxError,
+                            ZeroDivisionError,
+                            NameError,
+                        ) as error:
+                            print(f"Invalid equation: {error}")
+
+        except (ValueError, SyntaxError, ZeroDivisionError, NameError) as error:
             print(f"Invalid equation: {error}")
 
 
