@@ -45,7 +45,7 @@ def calculator():
                     while True:
                         try:
                             q = input(
-                                "Do you want to continue with the previous result? (Y/N): "
+                                f"Do you want to continue with the previous result({result1})? (Y/N): "
                             )
                             if q == "y":
                                 break
