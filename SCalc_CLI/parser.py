@@ -17,13 +17,13 @@ def parser(equation: str):
 
         # If the parser goes thruogh the user input and if it finds a "-" symbol
         # We know that a number is negative only if it is before a number and
-        # if it has another symbol before
+        # if it has another symbol before (or is at the start)
         # The parser then checks to see if it has/has not another symbol before the "-"
         # and we get the last digit(last_neg_pos) and the first digit(last known position)
         # and make a negative number from the first digit to the last
         # and add that negative number to the index list
         if character == "-" and (
-            position == 0 or equation[position - 1] in ["+", "-", "*", "/", "("]
+            len(indexes) == 0 or indexes[-1] in ["+", "-", "*", "x", "X", "/", "("]
         ):
             # The pasrser starts from the first character after "-"
             neg_last_pos = position + 1
@@ -86,7 +86,7 @@ def parser(equation: str):
 
         # If the parser finds one of these characters,
         # it adds them to the index list
-        if character in ["+", "-", "*", "/", "(", ")"]:
+        if character in ["+", "-", "*", "x", "X", "/", "(", ")"]:
             indexes.append(character)
             position += 1
             continue
@@ -96,6 +96,3 @@ def parser(equation: str):
 
     # We return the parsed index list from the input string
     return indexes
-
-
-print(parser(input("Please enter an equation: ")))
