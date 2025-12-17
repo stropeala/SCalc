@@ -34,3 +34,18 @@
 #     /* If the operator token on the top of the stack is a parenthesis, then there are mismatched parentheses. */
 #     {assert the operator on top of the stack is not a (left) parenthesis}
 #     pop the operator from the operator stack onto the output queue
+
+
+def shunting_yard_algorithm(tokens):
+    output_queue = []  # numbers
+    operator_stack = []  # symbols
+    precedence = {
+        "+": 1,  # low priority
+        "-": 1,  # low priority
+        "*": 2,  # mid priority
+        "/": 2,  # mid priority
+        "(": 3,  # high priority
+        ")": 3,  # high priority
+    }
+
+    for token in tokens:
