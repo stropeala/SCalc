@@ -36,16 +36,28 @@
 #     pop the operator from the operator stack onto the output queue
 
 
-def shunting_yard_algorithm(tokens):
+def shunting_yard_algorithm(indexes):
     output_queue = []  # numbers
     operator_stack = []  # symbols
     precedence = {
         "+": 1,  # low priority
         "-": 1,  # low priority
         "*": 2,  # mid priority
+        "x": 2,  # mid priority
+        "X": 2,  # mid priority
         "/": 2,  # mid priority
         "(": 3,  # high priority
         ")": 3,  # high priority
     }
 
-    for token in tokens:
+    for index in indexes:
+        if isinstance(index, int):
+            output_queue.append(index)
+        elif isinstance(index, float):
+            output_queue.append(index)
+        elif isinstance(index, tuple) and index[0] == "PERCENT":
+            output_queue.append(index)
+        elif index in ["+", "-", "*", "x", "X", "/", "(", ")"]:
+            operator_stack.append(index)
+
+    return output_queue, operator_stack
