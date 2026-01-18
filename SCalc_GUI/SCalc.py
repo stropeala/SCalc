@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import BOTH, END, LEFT, Button, Entry, Frame, Tk
 
 # We create the root window
 scalc = Tk()
